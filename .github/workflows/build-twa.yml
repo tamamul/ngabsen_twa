@@ -24,7 +24,8 @@ jobs:
 
       - name: Initialize TWA
         run: bubblewrap init --manifest=https://ngabsen.smkmaarif9kebumen.sch.id/manifest.json --overwrite --jdk-install yes
-
+        env:
+          BUBBLEWRAP_NONINTERACTIVE: 1
       - name: Build APK
         run: bubblewrap build
   
