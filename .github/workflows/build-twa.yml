@@ -23,10 +23,10 @@ jobs:
         run: npm install -g @bubblewrap/cli
 
       - name: Initialize TWA
-  run: bubblewrap init --manifest=https://ngabsen.smkmaarif9kebumen.sch.id/manifest.json --overwrite --jdk-install yes
+        run: bubblewrap init --manifest=https://ngabsen.smkmaarif9kebumen.sch.id/manifest.json --overwrite --jdk-install yes
 
-- name: Build APK
-  run: bubblewrap build
+      - name: Build APK
+        run: bubblewrap build
   
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
