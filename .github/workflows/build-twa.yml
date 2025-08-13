@@ -1,31 +1,35 @@
 name: Build TWA APK
 
-on: push: branches: [ main ]
+on:
+  push:
+    branches:
+      - main
 
-jobs: build: name: Build TWA APK runs-on: ubuntu-latest
+jobs:
+  build:
+    name: Build TWA APK
+    runs-on: ubuntu-latest
 
-steps:
-- name: Checkout repo
-  uses: actions/checkout@v3
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-- name: Set up Node.js
-  uses: actions/setup-node@v3
-  with:
-    node-version: '20'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
 
-- name: Install Bubblewrap CLI
-  run: npm install -g @bubblewrap/cli
+      - name: Install Bubblewrap CLI
+        run: npm install -g @bubblewrap/cli
 
-- name: Initialize TWA
-  run: |
-    bubblewrap init --manifest=https://ngabsen.smkmaarif9kebumen/manifest.json --overwrite
+      - name: Initialize TWA
+        run: bubblewrap init --manifest=https://YOUR_ABSEN_URL/manifest.json --overwrite
 
-- name: Build APK
-  run: bubblewrap build
+      - name: Build APK
+        run: bubblewrap build
 
-- name: Upload APK Artifact
-  uses: actions/upload-artifact@v3
-  with:
-    name: ngabsen-twa-apk
-    path: android/app/build/outputs/apk/debug/app-debug.apk
-
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ngabsen-twa-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
