@@ -22,6 +22,9 @@ jobs:
       - name: Install Bubblewrap CLI
         run: npm install -g @bubblewrap/cli
 
+      - name: Install OpenJDK
+        run: sudo apt-get update && sudo apt-get install -y openjdk-17-jdk
+
       - name: Initialize TWA
         run: bubblewrap init --manifest=https://ngabsen.smkmaarif9kebumen.sch.id/manifest.json --overwrite --jdk-install yes
         env:
