@@ -23,7 +23,8 @@ jobs:
         run: npm install -g @bubblewrap/cli@latest
 
       - name: Init Bubblewrap
-        run: echo "Y" | bubblewrap init --manifest=https://ngabsen.smkmaarif9kebumen.sch.id/manifest.json
+        run: |
+          echo "Y" | bubblewrap init --manifest=https://ngabsen.smkmaarif9kebumen.sch.id/manifest.json
       - name: Build APK
         run: bubblewrap build
 
