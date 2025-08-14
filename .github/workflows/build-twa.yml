@@ -24,7 +24,8 @@ jobs:
 
       - name: Init Bubblewrap
         run: |
-          echo "Y" | bubblewrap init --manifest=https://ngabsen.smkmaarif9kebumen.sch.id/manifest.json
+         yes | bubblewrap init --manifest=https://ngabsen.smkmaarif9kebumen.sch.id/manifest.json
+   
       - name: Build APK
         run: bubblewrap build
 
