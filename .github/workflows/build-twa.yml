@@ -37,7 +37,7 @@ jobs:
 
       - name: Init Bubblewrap
         run: |
-          bubblewrap init --manifest=https://ngabsen.smkmaarif9kebumen.sch.id/manifest.json --skipPwaValidation --skipGradleClean \
+          echo y | bubblewrap init --manifest=https://ngabsen.smkmaarif9kebumen.sch.id/manifest.json --skipPwaValidation --skipGradleClean \
             --packageId=com.ngabsen.twa \
             --name "Ngabsen" \
             --host ngabsen.smkmaarif9kebumen.sch.id \
