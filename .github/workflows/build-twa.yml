@@ -7,6 +7,7 @@ on:
 
 jobs:
   build:
+    name: Build TWA APK
     runs-on: ubuntu-latest
 
     steps:
@@ -21,28 +22,9 @@ jobs:
       - name: Install Bubblewrap CLI
         run: npm install -g @bubblewrap/cli@latest
 
-      - name: Install JDK & Android SDK
+      - name: Init Bubblewrap (auto Y for JDK & SDK)
         run: |
-          sudo apt-get update
-          sudo apt-get install -y openjdk-17-jdk unzip
-          mkdir -p $HOME/android-sdk
-          curl -sSL https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -o cmdline-tools.zip
-          unzip cmdline-tools.zip -d $HOME/android-sdk/
-          mkdir -p $HOME/android-sdk/cmdline-tools/latest
-          mv $HOME/android-sdk/cmdline-tools/* $HOME/android-sdk/cmdline-tools/latest/ || true
-          yes | $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses
-          $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2"
-          export ANDROID_HOME=$HOME/android-sdk
-          export PATH=$ANDROID_HOME/platform-tools:$PATH
-
-      - name: Init Bubblewrap
-        run: |
-          echo y | bubblewrap init --manifest=https://ngabsen.smkmaarif9kebumen.sch.id/manifest.json --skipPwaValidation --skipGradleClean \
-            --packageId=com.ngabsen.twa \
-            --name "Ngabsen" \
-            --host ngabsen.smkmaarif9kebumen.sch.id \
-            --display "standalone" \
-            --startUrl "/"
+          printf "Y\nY\n" | bubblewrap init --manifest=https://ngabsen.smkmaarif9kebumen.sch.id/manifest.json
 
       - name: Build APK
         run: bubblewrap build
