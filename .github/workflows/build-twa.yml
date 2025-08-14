@@ -22,9 +22,8 @@ jobs:
       - name: Install Bubblewrap CLI
         run: npm install -g @bubblewrap/cli@latest
 
-      - name: Install OpenJDK
-        run: sudo apt-get update && sudo apt-get install -y openjdk-17-jdk
-
+      - name: Init Bubblewrap
+        run: echo "Y" | bubblewrap init --manifest=https://ngabsen.smkmaarif9kebumen.sch.id/manifest.json
       - name: Build APK
         run: bubblewrap build
 
