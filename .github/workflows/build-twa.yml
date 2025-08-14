@@ -7,7 +7,6 @@ on:
 
 jobs:
   build:
-    name: Build TWA APK
     runs-on: ubuntu-latest
 
     steps:
@@ -22,8 +21,22 @@ jobs:
       - name: Install Bubblewrap CLI
         run: npm install -g @bubblewrap/cli@latest
 
-      - name: Init Bubblewrap (auto Y for JDK & SDK)
-        run: yes | bubblewrap init --manifest=https://ngabsen.smkmaarif9kebumen.sch.id/manifest.json
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Init Bubblewrap (no prompts)
+        run: |
+          bubblewrap init \
+            --manifest=https://ngabsen.smkmaarif9kebumen.sch.id/manifest.json \
+            --jdkPath=$JAVA_HOME \
+            --sdkPath=$ANDROID_HOME \
+            --skipSigning
 
       - name: Build APK
         run: bubblewrap build
